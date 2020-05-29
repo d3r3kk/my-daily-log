@@ -45,10 +45,11 @@ if __name__ == "__main__":
 
     log_day = datetime.date.today()
 
-    if opts.get("--ago", None):
-        log_day = datetime.date.today() - datetime.timedelta(
-            days=int(opts.get("--ago", 0))
-        )
-        log.debug(f"Log file day is being set to {log_day}.")
+    cfg = config.MyDailyLogConfig(
+        base_folder=pathlib.Path(opts["--base-folder"]),
+        template=pathlib.Path(opts["--template"]),
+        day_offset=opts.get("--ago", 0),
+        verbosity=logging.INFO if opts.get("--verbose")
+    )
 
     new_day.create_new_day(log_day, opts.get("--force", False))

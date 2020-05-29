@@ -6,6 +6,7 @@ import pathlib
 import shutil
 import sys
 
+from . import config
 
 log = logging.getLogger(__name__)
 
@@ -48,11 +49,11 @@ def create_new_log(
         shutil.copy2(template_file, log_file_path)
 
 
-def create_new_day(log_day: datetime, force: bool):
+def create_new_day(cfg: config.MyDailyLogConfig):
     log.debug("create_new_day")
-    if log_day is None:
-        log_day: datetime = datetime.date.today()
-        log.debug(f'Default log day being used (today={log_day.strftime("%b_%d_%y")})')
+
+    log_day = datetime.date.today() - datetime.timedelta(days=int(cfg.day_offset))
+    log.debug(f"Log file day is being set to {log_day}.")
 
     base_folder: pathlib.Path = pathlib.Path(__file__).resolve().parent
     template: pathlib.Path = get_template(base_folder)

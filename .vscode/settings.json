@@ -4,5 +4,6 @@
     "editor.formatOnSave": true,
     "python.linting.pylintEnabled": false,
     "python.linting.mypyEnabled": true,
-    "python.dataScience.debugJustMyCode": false
+    "python.dataScience.debugJustMyCode": false,
+    "python.pythonPath": "/home/derek/dev/github/my-daily-log/.venv/bin/python3"
 }
